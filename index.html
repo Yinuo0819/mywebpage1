@@ -35,7 +35,7 @@
 
         /* 保持按钮容器的样式 */
         .button-container {
-            margin-top: 156px; /* 向下移动更多 */
+            margin-top: 166px; /* 向下移动更多 */
             text-align: center; /* 居中对齐 */
         }
 
@@ -54,18 +54,18 @@
         /* 调整【答案】部分的样式 */
         .answer-section {
             position: absolute;
-            top: 100px; /* 向下移动一些 */
+            top: 120px; /* 向下移动20px */
             left: 50%; /* 居中对齐 */
             transform: translateX(-50%); /* 水平居中 */
             width: 300px; /* 延长左右各 50px */
             height: 240px; /* 确保可以显示更多行 */
-            color: #ADD8E6; /* 更低饱和度的天蓝色 */
+            color: #B2D7FF; /* 提高饱和度的颜色 */
             font-family: SimSun, STSong, Songti SC, serif;
             font-weight: bold;
-            font-size: 16px; /* 减小字体大小以便显示完整 */
+            font-size: 20px; /* 增加字体大小 */
             line-height: 24px;
             overflow-y: auto; /* 添加滚动条以便查看所有内容 */
-            text-align: center; /* 居中显示 */
+            text-align: left; /* 左对齐 */
         }
 
         /* 更新【解释】部分内容并居中显示 */
@@ -85,7 +85,7 @@
         /* 保持页脚的样式 */
         .footer {
             position: absolute;
-            bottom: 7px;
+            bottom: 14px; /* 上移7px */
             left: 50%;
             transform: translateX(-50%);
             font-size: 10px;
@@ -97,7 +97,7 @@
         /* 音乐控制按钮样式 */
         .music-control-button {
             position: absolute;
-            top: 10px;
+            top: 20px; /* 向下移动10px */
             right: 10px;
             width: 40px;
             height: 40px;
@@ -136,7 +136,7 @@
         <div id="explanation" class="explanation">遇事不决，问问小薛</div>
         
         <!-- 显示页脚信息 -->
-        <div class="footer">MADE BY KAPELL&HINHINYA</div>
+        <div class="footer">MADE BY KAPELL & HINHINYA</div>
         
         <!-- 包含按钮的内容容器 -->
         <div class="content-container">
@@ -148,12 +148,12 @@
 
         <!-- 音乐控制按钮 -->
         <button id="musicControlButton" class="music-control-button" onclick="toggleMusic()">
-            🎵
+            🎵/
         </button>
     </div>
 
     <!-- 背景音乐 -->
-    <audio id="backgroundAudio" autoplay loop>
+    <audio id="backgroundAudio" loop>
         <source src="https://raw.githubusercontent.com/Yinuo0819/my-audio-repo/main/audio/nothing1.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -311,6 +311,27 @@
             "别攥着拳头",
             "爱上就别低头，骄傲的自作自受",
             "在梦里等斑驳轻舟",
+            "别犹豫",
+            "别让人看出你有多委屈",
+            "别不安",
+            "别自己和自己过不去",
+            "还有太多誓言没实现呢",
+            "我还相信你说的",
+            "表现的还可以",
+            "最近你已走到了哪里",
+            "别有压力",
+            "在阴郁的地方积攒能量",
+            "别被渡人听见，你还有所留恋",
+            "我顺其自然，我表现勇敢",
+            "我应该平静的",
+            "督促我别过的不快乐",
+            "放纵过几个黑夜，尽力的狂欢",
+            "这世界怎么都是你，原来你住在我心里",
+            "树从不开口，破土后哪来的自由",
+            "无奈的请背过手，在缝里等野果成熟",
+            "别攥着拳头",
+            "爱上就别低头，骄傲的自作自受",
+            "在梦里等斑驳轻舟",
             "亲爱的，当明年的今天，红色枫叶再开成一片海的时候，我就回来了，你一定要在枫叶树下等着我",
             "我答应你会回来",
             "违心的样子你决定了吗",
@@ -406,7 +427,6 @@
             "对世界宽容一点，有一天世界也会对你宽容。",
             "人类总有一种难以言说的无奈，看似有许多关于人生的选项摆在面前，可能最后能抓到的却只有一个。",
             "如果我们未曾见过那么多选项，就不会如此贪心，时刻取舍，才能在割裂中成熟。",
-            "我可以让步，可以妥协，这并不代表我惧怕。",
             "我可以为我想做的事业拼命，但我不会为任何一件没有未来没前途的事浪费一分钟。",
             "在纸醉金迷的世界，你如果还有一点意识，请为自己的理想好好活着。",
             "活到最后才明白，其实谁都不清白。",
@@ -499,7 +519,7 @@
             "能留下来的一定是真心的。",
             "这个世界上，多说的人不如多做。",
             "希望我永远都在你们的方圆几里，希望你们也永远在我的方圆几里。",
-            "每个人都有自己喜欢的事情。每个人有每个人的爱好，尽力让自己去开心。",
+            "每个人都有自己最喜欢的事情。每个人有每个人的爱好，尽力让自己去开心。",
             "执念是愧对生活的一千个如果。",
             "当光打在身上，哪有理由不去声嘶力竭。",
             "你很棒，相信我，也要相信你自己。",
@@ -538,14 +558,13 @@
         const musicControlButton = document.getElementById('musicControlButton');
 
         // 切换音乐播放状态的函数
-        let isMusicPlaying = true;
+        let isMusicPlaying = false;
 
         function toggleMusic() {
             if (isMusicPlaying) {
                 audio.pause();
                 musicControlButton.innerHTML = `
-                    🎵
-                    <span class="closed-icon">/</span>
+                    🎵/
                 `;
             } else {
                 audio.play();
@@ -553,6 +572,9 @@
             }
             isMusicPlaying = !isMusicPlaying;
         }
+
+        // 初始化时暂停音乐
+        audio.pause();
     </script>
 </body>
 </html>
