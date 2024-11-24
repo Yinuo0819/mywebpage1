@@ -59,13 +59,14 @@
             transform: translateX(-50%); /* 水平居中 */
             width: 300px; /* 延长左右各 50px */
             height: 240px; /* 确保可以显示更多行 */
-            color: #B2D7FF; /* 提高饱和度的颜色 */
+            color: #87CEFA; /* 更改颜色为指定天蓝色，饱和度调高3% */
+            opacity: 0.8; /* 降低饱和度 */
             font-family: SimSun, STSong, Songti SC, serif;
             font-weight: bold;
-            font-size: 20px; /* 增加字体大小 */
+            font-size: 25px; /* 增加字体大小 */
             line-height: 24px;
             overflow-y: auto; /* 添加滚动条以便查看所有内容 */
-            text-align: left; /* 左对齐 */
+            text-align: center; /* 文本居中对齐 */
         }
 
         /* 更新【解释】部分内容并居中显示 */
@@ -112,17 +113,19 @@
             align-items: center;
         }
 
-        /* 关闭图标样式 */
-        .closed-icon {
+        /* 调整音乐控制按钮内的图标和斜杠位置 */
+        .music-control-button span.icon {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
             font-size: 24px;
             pointer-events: none;
+        }
+
+        .music-control-button span.icon.music-icon {
+            left: 7px; /* 右移8px */
+        }
+
+        .music-control-button span.icon.slash-icon {
+            right: 16px; /* 左移14px */
         }
     </style>
 </head>
@@ -148,13 +151,14 @@
 
         <!-- 音乐控制按钮 -->
         <button id="musicControlButton" class="music-control-button" onclick="toggleMusic()">
-            🎵/
+            <span class="icon music-icon">🎵</span>
+            <span class="icon slash-icon">/</span>
         </button>
     </div>
 
     <!-- 背景音乐 -->
     <audio id="backgroundAudio" loop>
-        <source src="https://raw.githubusercontent.com/Yinuo0819/my-audio-repo/main/audio/nothing1.mp3" type="audio/mpeg">
+        <source src="https://xuezhiqian0717.oss-cn-beijing.aliyuncs.com/nothing1.mp3?Expires=1732419027&OSSAccessKeyId=TMP.3Kgmovi6LPs1rFcvHwf9RZBrvcXdJ5UuNDBFwtp3PcYRMVuMpuYUvLQyn1Udz4Xxng6ksdT6qd1uKog59ZNqpUA2uW9VUy&Signature=%2B1Xi8RQEc%2BXo2RCjGrQjiYpHOuQ%3D" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -290,27 +294,6 @@
             "我可以每天陪着你等小雨来",
             "请保持常态，偶尔缅怀",
             "风带我看繁花在雨里盛开",
-            "别犹豫",
-            "别让人看出你有多委屈",
-            "别不安",
-            "别自己和自己过不去",
-            "还有太多誓言没实现呢",
-            "我还相信你说的",
-            "表现的还可以",
-            "最近你已走到了哪里",
-            "别有压力",
-            "在阴郁的地方积攒能量",
-            "别被渡人听见，你还有所留恋",
-            "我顺其自然，我表现勇敢",
-            "我应该平静的",
-            "督促我别过的不快乐",
-            "放纵过几个黑夜，尽力的狂欢",
-            "这世界怎么都是你，原来你住在我心里",
-            "树从不开口，破土后哪来的自由",
-            "无奈的请背过手，在缝里等野果成熟",
-            "别攥着拳头",
-            "爱上就别低头，骄傲的自作自受",
-            "在梦里等斑驳轻舟",
             "别犹豫",
             "别让人看出你有多委屈",
             "别不安",
@@ -519,7 +502,7 @@
             "能留下来的一定是真心的。",
             "这个世界上，多说的人不如多做。",
             "希望我永远都在你们的方圆几里，希望你们也永远在我的方圆几里。",
-            "每个人都有自己最喜欢的事情。每个人有每个人的爱好，尽力让自己去开心。",
+            "每个人都有自己喜欢的事情。每个人有每个人的爱好，尽力让自己去开心。",
             "执念是愧对生活的一千个如果。",
             "当光打在身上，哪有理由不去声嘶力竭。",
             "你很棒，相信我，也要相信你自己。",
@@ -564,20 +547,27 @@
             if (isMusicPlaying) {
                 audio.pause();
                 musicControlButton.innerHTML = `
-                    🎵/
+                    <span class="icon music-icon">🎵</span>
+                    <span class="icon slash-icon">/</span>
                 `;
             } else {
                 audio.play();
-                musicControlButton.innerHTML = '🎵';
+                musicControlButton.innerHTML = '<span class="icon music-icon">🎵</span>';
             }
             isMusicPlaying = !isMusicPlaying;
         }
 
         // 初始化时暂停音乐
         audio.pause();
+
+        // 页面加载完成后生成一个初始答案
+        window.onload = generateAnswer;
     </script>
 </body>
 </html>
+
+
+
 
 
 
