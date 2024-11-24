@@ -67,6 +67,7 @@
             line-height: 24px;
             overflow-y: auto; /* 添加滚动条以便查看所有内容 */
             text-align: center; /* 文本居中对齐 */
+            display: none; /* 初始状态下隐藏 */
         }
 
         /* 更新【解释】部分内容并居中显示 */
@@ -158,7 +159,7 @@
 
     <!-- 背景音乐 -->
     <audio id="backgroundAudio" loop>
-        <source src="https://xuezhiqian0717.oss-cn-beijing.aliyuncs.com/nothing1.mp3?Expires=1732419027&OSSAccessKeyId=TMP.3Kgmovi6LPs1rFcvHwf9RZBrvcXdJ5UuNDBFwtp3PcYRMVuMpuYUvLQyn1Udz4Xxng6ksdT6qd1uKog59ZNqpUA2uW9VUy&Signature=%2B1Xi8RQEc%2BXo2RCjGrQjiYpHOuQ%3D" type="audio/mpeg">
+        <source src="https://xuezhiqian0717.oss-cn-beijing.aliyuncs.com/nothing1.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -410,6 +411,7 @@
             "对世界宽容一点，有一天世界也会对你宽容。",
             "人类总有一种难以言说的无奈，看似有许多关于人生的选项摆在面前，可能最后能抓到的却只有一个。",
             "如果我们未曾见过那么多选项，就不会如此贪心，时刻取舍，才能在割裂中成熟。",
+            "我可以让步，可以妥协，这并不代表我惧怕。",
             "我可以为我想做的事业拼命，但我不会为任何一件没有未来没前途的事浪费一分钟。",
             "在纸醉金迷的世界，你如果还有一点意识，请为自己的理想好好活着。",
             "活到最后才明白，其实谁都不清白。",
@@ -530,15 +532,19 @@
             "每个人都不要小看自己的任何能力。"
         ];
 
+        // 获取音频元素和音乐控制按钮
+        const audio = document.getElementById('backgroundAudio');
+        const musicControlButton = document.getElementById('musicControlButton');
+
+        // 初始化时暂停音乐
+        audio.pause();
+
         // 生成随机答案的函数
         function generateAnswer() {
             const randomIndex = Math.floor(Math.random() * answers.length);
             document.getElementById('answerSection').innerText = answers[randomIndex];
+            document.getElementById('answerSection').style.display = 'block'; // 显示答案
         }
-
-        // 获取音频元素和音乐控制按钮
-        const audio = document.getElementById('backgroundAudio');
-        const musicControlButton = document.getElementById('musicControlButton');
 
         // 切换音乐播放状态的函数
         let isMusicPlaying = false;
@@ -551,20 +557,32 @@
                     <span class="icon slash-icon">/</span>
                 `;
             } else {
-                audio.play();
+                audio.play().catch(error => {
+                    console.error("Failed to play audio:", error);
+                });
                 musicControlButton.innerHTML = '<span class="icon music-icon">🎵</span>';
             }
             isMusicPlaying = !isMusicPlaying;
         }
 
-        // 初始化时暂停音乐
-        audio.pause();
+        // 处理自动播放策略
+        document.addEventListener('click', () => {
+            if (!isMusicPlaying) {
+                audio.play().then(() => {
+                    console.log("Audio started playing");
+                }).catch(error => {
+                    console.error("Failed to play audio:", error);
+                });
+            }
+        }, { once: true });
 
-        // 页面加载完成后生成一个初始答案
-        window.onload = generateAnswer;
+        // 页面加载完成后不生成初始答案
     </script>
 </body>
 </html>
+
+
+
 
 
 
