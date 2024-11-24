@@ -19,7 +19,7 @@
         /* 设置画布的宽度为 500px，以实现文本框左右各缩 50px */
         .canvas {
             position: relative;
-            width: 300px;
+            width: 350px;
             height: 700px;
             background-color: #000;
         }
@@ -58,7 +58,7 @@
             left: 50%; /* 居中对齐 */
             transform: translateX(-50%); /* 水平居中 */
             width: 300px; /* 延长左右各 50px */
-            height: 300px; /* 确保可以显示更多行 */
+            height: 240px; /* 确保可以显示更多行 */
             color: #ADD8E6; /* 更低饱和度的天蓝色 */
             font-family: SimSun, STSong, Songti SC, serif;
             font-weight: bold;
@@ -93,6 +93,37 @@
             color: rgba(255, 255, 255, 0.41);
             font-family: SimSun, STSong, Songti SC, serif;
         }
+
+        /* 音乐控制按钮样式 */
+        .music-control-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #1C1C1C;
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 关闭图标样式 */
+        .closed-icon {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -114,10 +145,15 @@
                 <button onclick="generateAnswer()">🛸</button>
             </div>
         </div>
+
+        <!-- 音乐控制按钮 -->
+        <button id="musicControlButton" class="music-control-button" onclick="toggleMusic()">
+            🎵
+        </button>
     </div>
 
     <!-- 背景音乐 -->
-    <audio autoplay loop>
+    <audio id="backgroundAudio" autoplay loop>
         <source src="https://raw.githubusercontent.com/Yinuo0819/my-audio-repo/main/audio/nothing1.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -496,15 +532,30 @@
             const randomIndex = Math.floor(Math.random() * answers.length);
             document.getElementById('answerSection').innerText = answers[randomIndex];
         }
+
+        // 获取音频元素和音乐控制按钮
+        const audio = document.getElementById('backgroundAudio');
+        const musicControlButton = document.getElementById('musicControlButton');
+
+        // 切换音乐播放状态的函数
+        let isMusicPlaying = true;
+
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                audio.pause();
+                musicControlButton.innerHTML = `
+                    🎵
+                    <span class="closed-icon">/</span>
+                `;
+            } else {
+                audio.play();
+                musicControlButton.innerHTML = '🎵';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
     </script>
 </body>
 </html>
-
-
-
-
-
-
 
 
 
